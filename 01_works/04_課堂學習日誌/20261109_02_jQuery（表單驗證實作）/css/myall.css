@@ -1,0 +1,8 @@
+/* 第二章：依照老師的綠色標題、灰色確認區塊 */
+body { background: #eef0f2; font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
+.fw-900 { font-weight: 900; }
+.course-title { background: #207c5e; color: #fff; text-align: center; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 900; padding: 18px 10px; margin: 24px 0; }
+.confirm-panel { background: #747a80; padding: 12px; margin-top: 22px; }
+.confirm-title { background: #ffc107; padding: 18px 8px; text-align: center; font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 900; margin: 8px 0 20px; }
+.confirm-values { overflow-wrap: anywhere; }
+.confirm-values .h2 { font-size: clamp(1.15rem, 2.5vw, 1.55rem); }

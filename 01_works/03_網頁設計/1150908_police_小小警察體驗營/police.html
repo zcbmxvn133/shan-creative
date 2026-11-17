@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="0-6歲兒童小小警察體驗課線上報名">
+  <title>小小警察體驗課｜線上報名</title>
+  <style>
+    :root {
+      --navy-950: #061323;
+      --navy-900: #0b2038;
+      --navy-800: #123454;
+      --police-blue: #27a8ff;
+      --light-blue: #7dd3fc;
+      --signal-red: #ff5364;
+      --badge-gold: #f9c74f;
+      --paper: #f7fbff;
+      --ink: #17283a;
+      --muted: #60758a;
+      --white: #ffffff;
+      --line: #d7e8f5;
+      --success: #17a673;
+      --shadow: 0 18px 55px rgba(7, 28, 52, .16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 12% 4%, rgba(39,168,255,.12), transparent 27rem),
+        linear-gradient(180deg, #eef8ff 0%, var(--paper) 36rem);
+    }
+
+    button, input, select { font: inherit; }
+
+    .topbar {
+      color: var(--white);
+      background: var(--navy-950);
+      border-bottom: 4px solid;
+      border-image: linear-gradient(90deg, var(--police-blue) 50%, var(--signal-red) 50%) 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 72px;
+      margin: auto;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; }
+
+    .shield {
+      display: grid;
+      width: 42px;
+      height: 48px;
+      place-items: center;
+      color: var(--navy-950);
+      background: var(--badge-gold);
+      clip-path: polygon(50% 0, 94% 15%, 84% 76%, 50% 100%, 16% 76%, 6% 15%);
+      font-size: 1.1rem;
+    }
+
+    .nav a {
+      padding: 10px 15px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 999px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: linear-gradient(128deg, var(--navy-950), var(--navy-800));
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .22;
+      background-image: repeating-linear-gradient(135deg, transparent 0 34px, rgba(255,255,255,.14) 35px 36px);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 48px;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 460px;
+      margin: auto;
+      padding: 66px 0;
+    }
+
+    .kicker {
+      display: inline-flex;
+      padding: 7px 12px;
+      border: 1px solid rgba(125,211,252,.45);
+      border-radius: 999px;
+      color: var(--light-blue);
+      background: rgba(39,168,255,.1);
+      font-size: .9rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    h1 { margin: 18px 0 16px; font-size: clamp(2.45rem, 7vw, 5.5rem); line-height: 1.02; letter-spacing: -.05em; }
+    .hero p { max-width: 620px; margin: 0; color: #cfe8f8; font-size: 1.08rem; line-height: 1.8; }
+
+    .hero-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .hero-facts span { padding: 9px 12px; border-radius: 10px; color: var(--navy-950); background: var(--badge-gold); font-weight: 900; }
+
+    .siren-card {
+      position: relative;
+      height: 250px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 32px;
+      background: rgba(255,255,255,.07);
+      box-shadow: 0 26px 80px rgba(0,0,0,.3);
+      backdrop-filter: blur(16px);
+    }
+
+    .siren-card::before, .siren-card::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .siren-card::before { left: 18%; background: var(--police-blue); box-shadow: 0 0 46px var(--police-blue); }
+    .siren-card::after { right: 18%; background: var(--signal-red); box-shadow: 0 0 46px var(--signal-red); animation-delay: -.9s; }
+    .cap { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; font-size: 5.8rem; filter: drop-shadow(0 12px 16px rgba(0,0,0,.25)); }
+
+    @keyframes pulse { 0%,100% { opacity: .32; transform: translateY(-50%) scale(.82); } 50% { opacity: .9; transform: translateY(-50%) scale(1.08); } }
+
+    .section { width: min(1120px, calc(100% - 32px)); margin: auto; padding: 72px 0; }
+    .section-title { margin: 0 0 10px; color: var(--navy-900); font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    .section-lead { margin: 0 0 30px; color: var(--muted); line-height: 1.75; }
+
+    .missions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .mission { padding: 24px 20px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: 0 12px 30px rgba(7,28,52,.07); }
+    .mission b { display: block; margin: 13px 0 8px; color: var(--navy-900); font-size: 1.06rem; }
+    .mission p { margin: 0; color: var(--muted); line-height: 1.65; }
+    .mission-icon { display: grid; width: 48px; height: 48px; place-items: center; border-radius: 14px; color: var(--white); background: linear-gradient(135deg, var(--police-blue), #1262d8); font-size: 1.35rem; }
+
+    .register-zone { background: linear-gradient(180deg, rgba(215,232,245,.34), rgba(238,248,255,.8)); }
+    .register-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 24px; align-items: start; }
+
+    .card { border: 1px solid var(--line); border-radius: 24px; background: rgba(255,255,255,.88); box-shadow: var(--shadow); overflow: hidden; }
+    .card-header { padding: 22px 26px; color: var(--white); background: var(--navy-900); }
+    .card-header h2 { margin: 0; font-size: 1.3rem; }
+    .card-body { padding: 26px; }
+
+    .field { margin-bottom: 17px; }
+    label { display: block; margin-bottom: 7px; color: var(--navy-900); font-size: .92rem; font-weight: 900; }
+    input, select { width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #c9dae7; border-radius: 12px; outline: none; color: var(--ink); background: var(--white); transition: .2s; }
+    input:focus, select:focus { border-color: var(--police-blue); box-shadow: 0 0 0 4px rgba(39,168,255,.14); transform: translateY(-1px); }
+
+    .submit-btn, .refresh-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      color: var(--white);
+      background: linear-gradient(100deg, #087ed0, var(--police-blue));
+      box-shadow: 0 10px 24px rgba(39,168,255,.25);
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .submit-btn { width: 100%; }
+    .submit-btn:hover:not(:disabled), .refresh-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(39,168,255,.34); }
+    .submit-btn:disabled { opacity: .62; cursor: wait; }
+    .refresh-btn { min-height: 38px; padding: 0 13px; color: var(--navy-900); background: #e5f4ff; box-shadow: none; }
+
+    .table-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+    .table-heading h3 { margin: 0; color: var(--navy-900); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+    table { width: 100%; min-width: 660px; border-collapse: collapse; }
+    th, td { padding: 14px 12px; border-bottom: 1px solid #e6eff6; text-align: left; }
+    th { color: #426077; background: #eff8fe; font-size: .82rem; }
+    td { font-size: .92rem; }
+    tbody tr:hover { background: #f7fcff; }
+
+    .status { display: inline-flex; padding: 5px 9px; border-radius: 999px; color: #087553; background: #dff8ee; font-size: .8rem; font-weight: 900; }
+    .status.cancelled { color: #a52d3b; background: #ffe5e9; }
+    .state { display: grid; min-height: 280px; place-items: center; color: var(--muted); text-align: center; }
+    .spinner { width: 45px; height: 45px; margin: 0 auto 14px; border: 4px solid #dcecf7; border-top-color: var(--police-blue); border-right-color: var(--signal-red); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast-area { position: fixed; z-index: 20; top: 20px; right: 20px; display: grid; width: min(380px, calc(100% - 40px)); gap: 10px; }
+    .toast { padding: 15px 17px; border-left: 5px solid var(--success); border-radius: 13px; color: var(--white); background: var(--navy-950); box-shadow: 0 20px 50px rgba(0,0,0,.3); animation: toast-in .3s ease; }
+    .toast.error { border-left-color: var(--signal-red); }
+    .toast strong { display: block; margin-bottom: 4px; }
+    .toast small { color: #bfd4e3; font-size: .86rem; }
+    @keyframes toast-in { from { opacity: 0; transform: translateY(-10px); } }
+
+    .privacy-note { margin: 15px 0 0; color: var(--muted); font-size: .83rem; line-height: 1.6; }
+    .cancel-card { margin-top: 24px; border-color: #f3c7cc; }
+    .cancel-card .card-header { background: #7d2631; }
+    .cancel-grid { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; align-items: end; }
+    .cancel-grid .field { margin: 0; }
+    .cancel-btn { min-height: 48px; padding: 0 22px; border: 0; border-radius: 12px; color: var(--white); background: #b93445; font-weight: 900; cursor: pointer; }
+    .cancel-btn:hover:not(:disabled) { background: #9e2939; }
+    .cancel-btn:disabled { opacity: .62; cursor: wait; }
+    footer { padding: 28px 16px; color: #abc2d4; background: var(--navy-950); text-align: center; }
+
+    @media (max-width: 900px) {
+      .hero-inner, .register-grid { grid-template-columns: 1fr; }
+      .siren-card { display: none; }
+      .missions { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .nav { min-height: 64px; }
+      .nav a { display: none; }
+      .hero-inner { min-height: 0; padding: 55px 0; }
+      .missions { grid-template-columns: 1fr; }
+      .section { padding: 54px 0; }
+      .card-body { padding: 20px 16px; }
+      .cancel-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="主要導覽">
+      <div class="brand"><span class="shield">★</span><span>小小警察體驗營</span></div>
+      <a href="#registration">立即報名</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <span class="kicker">0–6 歲親子職業體驗</span>
+          <h1>今天，換我<br>守護大家！</h1>
+          <p>從交通指揮、指紋觀察到無線電任務，讓孩子在遊戲中認識警察工作、學習安全規則與團隊合作。0–2 歲須由家長全程陪同。</p>
+          <div class="hero-facts">
+            <span>每場 60 分鐘</span>
+            <span>親子共同參與</span>
+            <span>完成任務送證書</span>
+          </div>
+        </div>
+        <div class="siren-card" aria-hidden="true"><div class="cap">👮</div></div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="missions-title">
+      <h2 id="missions-title" class="section-title">四大警察任務</h2>
+      <p class="section-lead">活動會依孩子年齡調整難度，以認識、模仿和合作為主，不安排危險追逐或對抗內容。</p>
+      <div class="missions">
+        <article class="mission"><span class="mission-icon">🚦</span><b>交通安全指揮</b><p>認識紅綠燈、斑馬線與安全過馬路步驟。</p></article>
+        <article class="mission"><span class="mission-icon">🔎</span><b>小小鑑識員</b><p>觀察指紋紋路，練習耐心與細節辨識。</p></article>
+        <article class="mission"><span class="mission-icon">📻</span><b>無線電任務</b><p>學習簡短回報、輪流說話與團隊合作。</p></article>
+        <article class="mission"><span class="mission-icon">🛡️</span><b>安全守護宣誓</b><p>複習求助方法，完成任務並領取證書。</p></article>
+      </div>
+    </section>
+
+    <section id="registration" class="register-zone">
+      <div class="section">
+        <h2 class="section-title">線上報名</h2>
+        <p class="section-lead">填寫資料後會即時寫入 Google 試算表，右側名單僅公開暱稱、年齡組別與場次。</p>
+
+        <div class="register-grid">
+          <article class="card">
+            <header class="card-header"><h2>填寫兒童資料</h2></header>
+            <div class="card-body">
+              <form id="registrationForm">
+                <div class="field"><label for="childNickname">兒童暱稱</label><input id="childNickname" name="childNickname" maxlength="30" placeholder="例如：小宇" required></div>
+                <div class="field"><label for="ageGroup">年齡組別</label><select id="ageGroup" name="ageGroup" required><option value="">請選擇</option><option>0-2歲</option><option>3-4歲</option><option>5-6歲</option></select></div>
+                <div class="field"><label for="guardianName">家長姓名</label><input id="guardianName" name="guardianName" maxlength="30" autocomplete="name" required></div>
+                <div class="field"><label for="guardianPhone">家長手機</label><input id="guardianPhone" name="guardianPhone" type="tel" inputmode="numeric" pattern="09[0-9]{8}" maxlength="10" placeholder="0912345678" autocomplete="tel" required></div>
+                <div class="field"><label for="session">選擇場次</label><select id="session" name="session" required><option value="">請選擇</option><option>10/17（六）09:30</option><option>10/17（六）14:00</option><option>10/18（日）09:30</option></select></div>
+                <button id="submitButton" class="submit-btn" type="submit">送出報名</button>
+              </form>
+              <p class="privacy-note">家長姓名與電話只會保存在管理用試算表，不會顯示於公開報名名單。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <header class="card-header"><h2>報名狀態</h2></header>
+            <div class="card-body">
+              <div class="table-heading"><h3>最新報名名單</h3><button id="refreshButton" class="refresh-btn" type="button">重新整理</button></div>
+              <div id="listRegion" aria-live="polite"></div>
+            </div>
+          </article>
+        </div>
+
+        <article class="card cancel-card">
+          <header class="card-header"><h2>取消報名</h2></header>
+          <div class="card-body">
+            <form id="cancelForm" class="cancel-grid">
+              <div class="field">
+                <label for="cancelId">報名編號</label>
+                <input id="cancelId" name="id" type="number" min="1" inputmode="numeric" placeholder="例如：3" required>
+              </div>
+              <div class="field">
+                <label for="cancelPhone">報名時填寫的家長手機</label>
+                <input id="cancelPhone" name="guardianPhone" type="tel" inputmode="numeric" pattern="09[0-9]{8}" maxlength="10" placeholder="0912345678" required>
+              </div>
+              <button id="cancelButton" class="cancel-btn" type="submit">確認取消</button>
+            </form>
+            <p class="privacy-note">取消後會保留報名紀錄，狀態改為「已取消」。報名編號與家長手機必須相符。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>小小警察體驗營｜兒童安全與職業認識活動</footer>
+  <div id="toastArea" class="toast-area" aria-live="assertive"></div>
+
+  <script>
+    // 請替換成 Google Apps Script 部署後的網頁應用程式網址。
+    const API_URL = 'https://script.google.com/macros/s/AKfycbx4mUBwqPym5X8KjtrMl8HXGtgxvkDzywi6h5o-GDGwvwAczdf4IjKMvzDMPuoRfEcXrg/exec';
+
+    const form = document.getElementById('registrationForm');
+    const cancelForm = document.getElementById('cancelForm');
+    const submitButton = document.getElementById('submitButton');
+    const cancelButton = document.getElementById('cancelButton');
+    const refreshButton = document.getElementById('refreshButton');
+    const listRegion = document.getElementById('listRegion');
+    const toastArea = document.getElementById('toastArea');
+
+    function apiIsReady() {
+      return API_URL && !API_URL.includes('請貼上你的');
+    }
+
+    function showState(message, loading = false) {
+      listRegion.replaceChildren();
+      const state = document.createElement('div');
+      state.className = 'state';
+      const box = document.createElement('div');
+      if (loading) {
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner';
+        spinner.setAttribute('aria-hidden', 'true');
+        box.appendChild(spinner);
+      }
+      const text = document.createElement('p');
+      text.textContent = message;
+      box.appendChild(text);
+      state.appendChild(box);
+      listRegion.appendChild(state);
+    }
+
+    function renderRegistrations(items) {
+      listRegion.replaceChildren();
+      if (!items.length) {
+        showState('目前還沒有報名資料。');
+        return;
+      }
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-wrap';
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const headRow = document.createElement('tr');
+
+      ['編號', '兒童暱稱', '年齡', '場次', '狀態'].forEach(text => {
+        const th = document.createElement('th');
+        th.scope = 'col';
+        th.textContent = text;
+        headRow.appendChild(th);
+      });
+
+      thead.appendChild(headRow);
+      const tbody = document.createElement('tbody');
+
+      items.forEach(item => {
+        const row = document.createElement('tr');
+        [item.id, item.childNickname, item.ageGroup, item.session].forEach(value => {
+          const td = document.createElement('td');
+          td.textContent = value == null ? '' : String(value);
+          row.appendChild(td);
+        });
+        const statusCell = document.createElement('td');
+        const badge = document.createElement('span');
+        badge.className = `status${item.status === '已取消' ? ' cancelled' : ''}`;
+        badge.textContent = item.status || '報名成功';
+        statusCell.appendChild(badge);
+        row.appendChild(statusCell);
+        tbody.appendChild(row);
+      });
+
+      table.append(thead, tbody);
+      wrapper.appendChild(table);
+      listRegion.appendChild(wrapper);
+    }
+
+    async function fetchRegistrations() {
+      if (!apiIsReady()) {
+        showState('請先在 index.html 內填入 API_URL。');
+        return;
+      }
+
+      showState('正在讀取報名資料…', true);
+
+      try {
+        const response = await fetch(`${API_URL}?action=read`);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        if (result.status !== 'success') throw new Error(result.message || '讀取失敗');
+        renderRegistrations(Array.isArray(result.data) ? result.data : []);
+      } catch (error) {
+        showState('資料讀取失敗，請確認 API 網址與部署權限。');
+        showToast('讀取失敗', error.message, true);
+      }
+    }
+
+    function setSubmitting(isLoading) {
+      submitButton.disabled = isLoading;
+      submitButton.textContent = isLoading ? '報名資料送出中…' : '送出報名';
+    }
+
+    function showToast(title, message, isError = false) {
+      const toast = document.createElement('div');
+      toast.className = `toast${isError ? ' error' : ''}`;
+      const strong = document.createElement('strong');
+      strong.textContent = title;
+      const small = document.createElement('small');
+      small.textContent = message;
+      toast.append(strong, small);
+      toastArea.appendChild(toast);
+      setTimeout(() => toast.remove(), 4500);
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!apiIsReady()) {
+        showToast('尚未設定 API', '請先替換 index.html 裡的 API_URL。', true);
+        return;
+      }
+
+      const data = new FormData(form);
+      const payload = {
+        childNickname: String(data.get('childNickname') || '').trim(),
+        ageGroup: String(data.get('ageGroup') || ''),
+        guardianName: String(data.get('guardianName') || '').trim(),
+        guardianPhone: String(data.get('guardianPhone') || '').trim(),
+        session: String(data.get('session') || '')
+      };
+
+      setSubmitting(true);
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        if (result.status !== 'success') throw new Error(result.message || '報名失敗');
+        showToast('報名成功', '資料已寫入，請留意後續活動通知。');
+        form.reset();
+        await fetchRegistrations();
+      } catch (error) {
+        showToast('報名失敗', error.message, true);
+      } finally {
+        setSubmitting(false);
+      }
+    });
+
+    cancelForm.addEventListener('submit', async event => {
+      event.preventDefault();
+
+      if (!apiIsReady()) {
+        showToast('尚未設定 API', '請先替換 index.html 裡的 API_URL。', true);
+        return;
+      }
+
+      const data = new FormData(cancelForm);
+      const payload = {
+        action: 'cancel',
+        id: Number(data.get('id')),
+        guardianPhone: String(data.get('guardianPhone') || '').trim()
+      };
+
+      cancelButton.disabled = true;
+      cancelButton.textContent = '取消處理中…';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const result = await response.json();
+        if (result.status !== 'success') throw new Error(result.message || '取消失敗');
+        showToast('取消完成', result.message || '報名取消成功');
+        cancelForm.reset();
+        await fetchRegistrations();
+      } catch (error) {
+        showToast('取消失敗', error.message, true);
+      } finally {
+        cancelButton.disabled = false;
+        cancelButton.textContent = '確認取消';
+      }
+    });
+
+    refreshButton.addEventListener('click', fetchRegistrations);
+    fetchRegistrations();
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ch8. 表單 Forms｜11/09</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/myall.css">
+</head>
+
+<body class="bg-light">
+  <div class="container my-5">
+    <div class="display-2 fw-900 text-center text-bg-warning py-3 my-3">Ch8. 表單 Forms</div>
+    <div class="h1 fw-900 text-primary">1. 基本表單</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3"><label for="username" class="form-label">姓名</label><input type="text"
+            class="form-control form-control-lg" id="username" placeholder="請填入姓名，字數1~6個。"></div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3"><label for="basicPassword" class="form-label">密碼</label><input type="password"
+            class="form-control" id="basicPassword" placeholder="請填入密碼，必須包含一個英文大寫與一個英文小寫，字數1~6個。"></div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3"><label for="email" class="form-label">Email</label><input type="email" class="form-control"
+            id="email"></div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3"><label for="number" class="form-label">數量</label><input type="number" class="form-control"
+            id="number" min="0" max="100" step="1" value="50"></div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3"><label for="myfile" class="form-label">檔案</label><input type="file"
+            class="form-control form-control-lg" id="myfile"></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">2. Datalists</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3"><label for="exampleDatalists" class="form-label">選擇單點</label><input type="text"
+            class="form-control form-control-lg" id="exampleDatalists" list="datalistOption"><datalist
+            id="datalistOption">
+            <option value="銷售排行1: 漢堡">
+            <option value="銷售排行2: 薯條">
+            <option value="銷售排行3: 雞塊">
+            <option value="銷售排行4: 咖啡">
+          </datalist></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">3. 下拉選單 select</div>
+    <div class="row">
+      <div class="col-12"><label for="myselect" class="form-label">選擇餐點方案</label><select id="myselect"
+          class="form-select form-select-lg mb-3">
+          <option value="方案一">方案一</option>
+          <option value="方案二">方案二</option>
+          <option value="方案三">方案三</option>
+        </select><select id="city" class="form-select mb-3" aria-label="縣市選擇">
+          <option value="" selected>--- 請選縣市名稱 ---</option>
+          <option value="臺北市">臺北市</option>
+          <option value="臺中市">臺中市</option>
+          <option value="高雄市">高雄市</option>
+          <option value="其他">其他</option>
+        </select></div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">4. checkbox</div>
+    <div class="row">
+      <div class="col-12 d-flex flex-wrap gap-3">
+        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="check01"><label
+            class="form-check-label" for="check01">選項01</label></div>
+        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="check02"><label
+            class="form-check-label" for="check02">選項02</label></div>
+        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="check03"><label
+            class="form-check-label" for="check03">選項03</label></div>
+        <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="check04"><label
+            class="form-check-label" for="check04">選項04</label></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">5. radio</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-check"><input type="radio" class="form-check-input" id="radio01" name="myradio"><label
+            for="radio01" class="form-check-label">選項01</label></div>
+        <div class="form-check"><input type="radio" class="form-check-input" id="radio02" name="myradio"><label
+            for="radio02" class="form-check-label">選項02</label></div>
+        <div class="form-check"><input type="radio" class="form-check-input" id="radio03" name="myradio"><label
+            for="radio03" class="form-check-label">選項03</label></div>
+        <div class="form-check"><input type="radio" class="form-check-input" id="radio04" name="myradio"><label
+            for="radio04" class="form-check-label">選項04</label></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">6. switch</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-check form-switch"><input type="checkbox" class="form-check-input" id="switch01"
+            role="switch"><label for="switch01" class="form-check-label">開/關</label></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">7. range</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3"><label for="range01" class="form-label">數量: <span class="fs-3 text-success fw-bold"
+              id="rangeValue">30</span> 個</label><input type="range" id="range01" class="form-range" min="0" max="100"
+            step="1" value="30">
+          <div class="d-flex justify-content-between">
+            <div class="h2">0</div>
+            <div class="h2">100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">8. input-group</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="input-group mb-3"><span class="input-group-text">姓名</span><input type="text" class="form-control"
+            placeholder="請填入姓名，字數1~6個。" aria-label="姓名"></div>
+        <div class="input-group mb-3"><input type="text" class="form-control" placeholder="請填入google帳號"
+            aria-label="Google帳號"><span class="input-group-text">@gmail.com</span></div>
+        <div class="input-group mb-3"><span class="input-group-text">09</span><input type="text" inputmode="numeric"
+            maxlength="8" class="form-control" placeholder="請填入行動電話後8碼。" aria-label="行動電話後八碼"></div>
+        <div class="input-group mb-3"><input type="search" class="form-control" id="searchText" placeholder="請填入關鍵字"
+            aria-label="搜尋關鍵字"><button class="btn btn-outline-primary" type="button" id="searchButton">搜尋</button></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">9. floating label</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3 form-floating"><input type="text" class="form-control form-control-lg" id="floatingName"
+            placeholder="姓名"><label for="floatingName">姓名</label></div>
+        <div class="mb-3 form-floating"><input type="email" class="form-control form-control-lg" id="floatingEmail"
+            placeholder="Email"><label for="floatingEmail">Email</label></div>
+      </div>
+    </div>
+
+    <div class="h1 fw-900 text-primary mt-3">10. 表單驗證</div>
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3"><label for="validateName" class="form-label">姓名</label><input type="text"
+            class="form-control form-control-lg is-valid" id="validateName" placeholder="請填入姓名，字數1~6個。">
+          <div class="valid-feedback">姓名輸入符合規定。</div>
+          <div class="invalid-feedback">姓名輸入不符合規定。</div>
+        </div>
+        <div class="mb-3"><label for="password" class="form-label">密碼</label><input type="password"
+            class="form-control form-control-lg is-invalid" id="password" placeholder="請填入密碼，必須包含一個英文大寫與一個英文小寫，字數1~6個。">
+          <div class="valid-feedback">密碼輸入符合規定。</div>
+          <div class="invalid-feedback">密碼輸入不符合規定。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
